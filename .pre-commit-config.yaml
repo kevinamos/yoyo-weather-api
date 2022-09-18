@@ -1,0 +1,50 @@
+repos:
+  - repo: https://github.com/ambv/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: isort (python)
+        types: [python]
+
+  - repo: local
+    # We do not use pre-commit/mirrors-mypy,
+    # as it comes with opinionated defaults
+    # (like --ignore-missing-imports)
+    # and is difficult to configure to run
+    # with the dependencies correctly installed.
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: python
+        language_version: python3.8
+        additional_dependencies: ["mypy==0.950"]
+        types: [python]
+        # use require_serial so that script
+        # is only called once per commit
+        require_serial: true
+        # Print the number of files as a sanity-check
+        verbose: true
+        args: [--ignore-missing-imports, --follow-imports=skip, --install-types, --non-interactive, --strict-optional, --disallow-any-generics]
+
+  - repo: local
+    # We do not use pre-commit/mirrors-flake8
+    # Our flake8 setup is pretty obnoxiously custom
+    hooks:
+      - id: lint
+        name: lint
+        # -U0 --relative because flake8 diff expects relative paths
+        entry: bash -c "cd app && pipenv run flakeheaven lint $(git diff --staged --relative --name-only | grep '\.py')"
+        # use system to run within the local pipenv
+        language: system
+        types: [python]
+        # use require_serial so that script
+        # is only called once per commit
+        require_serial: true
+        # Print the number of files as a sanity-check
+        verbose: true

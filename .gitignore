@@ -16,4 +16,5 @@ xyz.py
 tags
 tmp_images
 logfile
+db.sqlite*
 *.log
