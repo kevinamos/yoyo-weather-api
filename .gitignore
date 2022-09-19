@@ -7,7 +7,7 @@ __pycache__
 .#*
 .pytest_cache
 .vscode
-.env
+.env*
 ngrok.yml
 .mypy_cache
 .vscode/*

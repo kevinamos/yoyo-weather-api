@@ -17,6 +17,7 @@ sqlparse = "==0.4.2"
 typing_extensions = "==4.1.1"
 urllib3 = "==1.26.12"
 python-dotenv = "*"
+pytest = "*"
 
 [dev-packages]
 autopep8 = "==1.5.7"
