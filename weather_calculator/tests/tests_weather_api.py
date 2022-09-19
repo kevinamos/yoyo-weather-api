@@ -1,6 +1,4 @@
-from unittest.mock import patch
-
-from django.test import RequestFactory, TestCase
+from django.test import TestCase
 from rest_framework.test import APIRequestFactory
 
 from weather_calculator.api import get_weather_details_api
@@ -13,7 +11,7 @@ class TestGetWeatherDetailsAPI(TestCase):
         pass
 
     def test_animals_can_speak(self):
-        """Test ton check if api calls function correctly and return no errors.
+        """Test to check if api calls function correctly and return no errors.
 
         Consider monkeypatching this in future to avoid direct api calls, then test
         the max, min, mean and median calculations.
@@ -30,12 +28,9 @@ class TestGetWeatherDetailsAPI(TestCase):
         response = get_weather_details_api(request, city="London")
         assert response.status_code == 400
         # Test with a really large number of days
-        request = api_factory.get("api/locations/Nairobi/?days=999")
+        request = api_factory.get("api/locations/Nairobi/?days=99999")
         response = get_weather_details_api(request, city="London")
         assert response.status_code == 400
-        import pdb
-
-        pdb.set_trace()
 
 
 # class MockResponse:
