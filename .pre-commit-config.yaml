@@ -12,11 +12,6 @@ repos:
         types: [python]
 
   - repo: local
-    # We do not use pre-commit/mirrors-mypy,
-    # as it comes with opinionated defaults
-    # (like --ignore-missing-imports)
-    # and is difficult to configure to run
-    # with the dependencies correctly installed.
     hooks:
       - id: mypy
         name: mypy
@@ -33,8 +28,6 @@ repos:
         args: [--ignore-missing-imports, --follow-imports=skip, --install-types, --non-interactive, --strict-optional, --disallow-any-generics]
 
   - repo: local
-    # We do not use pre-commit/mirrors-flake8
-    # Our flake8 setup is pretty obnoxiously custom
     hooks:
       - id: lint
         name: lint
